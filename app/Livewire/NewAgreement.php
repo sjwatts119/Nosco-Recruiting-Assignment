@@ -89,6 +89,9 @@ class NewAgreement extends Component
 
         // Dispatch success message
         $this->dispatch('agreement-created');
+
+        // Redirect to the agreements page
+        redirect()->route('agreements.index');
     }
 
     public function render() : View

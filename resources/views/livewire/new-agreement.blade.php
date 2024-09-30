@@ -44,7 +44,7 @@
         </div>
     </form>
 
-    <div wire:transition x-show="success" class="mt-4 p-4 bg-green-500 text-white rounded">
+    <div x-show="success" class="mt-4 p-4 bg-green-500 text-white rounded">
         Agreement created successfully!
     </div>
 </div>
