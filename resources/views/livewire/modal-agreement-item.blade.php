@@ -15,8 +15,6 @@
 
             <div x-data="{
                 quantity: @if(isset($quantity)) {{ $quantity }} @else 1 @endif,
-                cost_price: @if(isset($cost_price)) {{ $cost_price }} @else 0.00 @endif,
-                retail_price: @if(isset($retail_price)) {{ $retail_price }} @else 0.00 @endif,
                 validateQuantity(value) {
                     return Math.max(value, 1);
                 },
@@ -44,7 +42,6 @@
                                type="number"
                                step="0.01"
                                id="cost_price"
-                               x-model.number="cost_price"
                                class="ps-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                placeholder="Enter cost price..."
                                required />
@@ -62,7 +59,6 @@
                                type="number"
                                step="0.01"
                                id="retail_price"
-                               x-model.number="retail_price"
                                class="ps-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                placeholder="Enter retail price..."
                                required />
