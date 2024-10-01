@@ -11,7 +11,7 @@
     <td class="px-6 py-4">
         {{ $agreement->created_at->diffForHumans() }}
     </td>
-    <td class="flex items-center px-6 py-4 justify-end">
-        <a href="{{ route('agreements.show', ['slug' => $agreement->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+    <td class="flex items-center px-6 py-4">
+        <a href="{{ route('agreements.show', ['slug' => $agreement->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" wire:navigate>View</a>
     </td>
 </tr>

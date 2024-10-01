@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\AgreementItem;
+use Illuminate\Support\Carbon;
 use Illuminate\View\View;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -24,7 +25,7 @@ class NewAgreement extends Component
         return [
             'customerForename' => 'required',
             'customerSurname' => 'required',
-            'customerDateOfBirth' => 'required|date',
+            'customerDateOfBirth' => 'required|date_format:m/d/Y',
         ];
     }
 
@@ -68,6 +69,9 @@ class NewAgreement extends Component
     {
         // Validate the input
         $validated = $this->validate();
+
+        // Convert the date format to Y-m-d
+        $validated['customerDateOfBirth'] = Carbon::createFromFormat('m/d/Y', $validated['customerDateOfBirth'])->format('Y-m-d');
 
         // Create the new agreement
         $agreement = auth()->user()->agreements()->create([

@@ -1,5 +1,5 @@
 <div class="bg-gray-800 p-4 rounded-lg">
-    <div class="pb-4">
+    <div class="mb-4">
         <label for="table-search" class="sr-only">Search</label>
         <div class="relative mt-1">
             <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -8,7 +8,7 @@
                 </svg>
             </div>
             <div class="flex justify-between items-center space-x-4">
-                <input type="text" id="table-search" wire:model.live.debounce.400ms="search" class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-full sm:w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items">
+                <input type="text" id="table-search" wire:model.live.debounce.400ms="search" class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-full sm:w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search agreements...">
                 <a href="{{ route('agreements.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition" wire:navigate>New</a>
             </div>
         </div>
