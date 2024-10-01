@@ -21,7 +21,15 @@
                 </div>
 
                 <div class="flex items-center ml-auto mt-4 md:mt-0">
-                    <span class="bg-gray-100 text-gray-800 text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded-xl me-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
+                    {{-- User that created the agreement --}}
+                    <span class="text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded-xl me-2 bg-gray-700 text-gray-400 border border-gray-500" title="Purchase Agreement Put Through By {{$agreement->user->name}}">
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clip-rule="evenodd"/>
+                        </svg>
+                        {{ $agreement->user->name }}
+                    </span>
+
+                    <span class="text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded-xl me-2 bg-gray-700 text-gray-400 border border-gray-500">
                         <svg class="w-2.5 h-2.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z"/>
                         </svg>
@@ -36,16 +44,28 @@
                 </div>
             </div>
 
-            <div class="flex justify-between mt-4">
-                <div class="flex flex-col">
-                    <div class="text-white text-lg">Customer: {{ $agreement->getFullCustomerName() }}</div>
-                    <div class="text-white text-sm">Date of Birth: {{ $agreement->customer_date_of_birth }}</div>
+            <hr class="my-12 border-gray-600"/>
+
+            <h3 class="text-center text-2xl font-bold text-white mt-8 mb-4">Customer Details</h3>
+
+            {{-- Customer Details --}}
+
+            <div class="flex space-x-4 justify-center">
+                {{-- Customer Details --}}
+                <div class="flex items-center w-full max-w-xs p-3 space-x-4 rtl:space-x-reverse text-gray-300 divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow dark:divide-gray-600 dark:bg-gray-900" role="alert">
+                    <svg class="w-8 h-8 text-gray-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clip-rule="evenodd"/>
+                    </svg>
+                    <div class="ps-4 text-sm font-normal">
+                        {{ $agreement->getFullCustomerName() }}<br>
+                        {{ $agreement->getFormattedDateOfBirth() }}
+                    </div>
                 </div>
             </div>
 
             <hr class="my-12 border-gray-600"/>
 
-            <div class="flex space-x-4 justify-center">
+            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
                 <div class="bg-green-900 hover:bg-green-800 border-green-700 border p-4 rounded-lg hover:bg-blue-800 transition">
                     <div class="flex justify-between">
                         <div class="text-white text-lg">Total Cost Price: {{ $agreement->getTotalCostPrice() }}</div>
@@ -78,7 +98,7 @@
 
                             <hr class="my-8 border-gray-200 dark:border-gray-600"/>
 
-                            <div class="flex justify-between items-center gap-x-4">
+                            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
                                 <span class="bg-green-900 hover:bg-green-800 border-green-700 border transition text-white text-sm md:text-base px-4 py-2 rounded-lg flex-grow text-center flex items-center justify-center">
                                     Cost Price: £{{ number_format($item->cost_price, 2) }}
                                 </span>

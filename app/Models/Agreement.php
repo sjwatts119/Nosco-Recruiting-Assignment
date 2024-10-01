@@ -49,6 +49,16 @@ class Agreement extends Model
     }
 
     /**
+     * Get a friendly formatted date of birth.
+     *
+     * @return string
+     */
+    public function getFormattedDateOfBirth() : string
+    {
+        return date('d/m/Y', strtotime($this->customer_date_of_birth));
+    }
+
+    /**
      * Get the number of agreement items related to this agreement.
      *
      * @return int
