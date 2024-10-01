@@ -28,4 +28,25 @@ class AgreementItem extends Model
     {
         return $this->belongsTo(Agreement::class);
     }
+
+
+    /**
+     * As we store prices in pennies, we need to convert them to pounds when we retrieve them.
+     * @param $value
+     * @return float
+     */
+    public function getCostPriceAttribute($value) : float
+    {
+        return $value / 100;
+    }
+
+    /**
+     * As we store prices in pennies, we need to convert them to pounds when we retrieve them.
+     * @param $value
+     * @return float
+     */
+    public function getRetailPriceAttribute($value) : float
+    {
+        return $value / 100;
+    }
 }

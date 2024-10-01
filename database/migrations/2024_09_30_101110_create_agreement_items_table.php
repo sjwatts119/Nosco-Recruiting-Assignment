@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->integer('quantity');
-            $table->decimal('cost_price', 10, 2);
-            $table->decimal('retail_price', 10, 2);
+            $table->integer('cost_price');
+            $table->integer('retail_price');
             $table->timestamps();
             $table->softDeletes();
         });
