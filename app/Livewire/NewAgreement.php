@@ -69,6 +69,12 @@ class NewAgreement extends Component
         // Validate the input
         $validated = $this->validate();
 
+        // If there are no items, display an error message
+        if (empty($this->items)) {
+            $this->addError('items', 'You must add at least one item to the agreement.');
+            return;
+        }
+
         // Convert the date format to Y-m-d
         $validated['customerDateOfBirth'] = Carbon::createFromFormat('m/d/Y', $validated['customerDateOfBirth'])->format('Y-m-d');
 

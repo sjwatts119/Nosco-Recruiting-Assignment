@@ -79,6 +79,8 @@
             </table>
         </div>
 
+        @error('items') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+
         <div class="flex justify-end">
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition">Create Agreement</button>
         </div>
