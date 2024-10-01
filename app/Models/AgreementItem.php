@@ -49,4 +49,26 @@ class AgreementItem extends Model
     {
         return $value / 100;
     }
+
+    /**
+     * Void the agreement item.
+     *
+     * @return void
+     */
+    public function void(): void
+    {
+        $this->voided_at = now();
+        $this->save();
+    }
+
+    /**
+     * Unvoid the agreement item.
+     *
+     * @return void
+     */
+    public function unvoid(): void
+    {
+        $this->voided_at = null;
+        $this->save();
+    }
 }

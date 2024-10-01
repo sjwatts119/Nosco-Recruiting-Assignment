@@ -57,4 +57,37 @@ class Agreement extends Model
     {
         return $this->agreementItems->sum('quantity');
     }
+
+    /**
+     * Void this agreement, and all associated items.
+     *
+     * @return void
+     */
+    public function void() : void
+    {
+        $this->voided_at = now();
+        $this->save();
+
+        // For every item associated with this, set voided_at to now
+        $this->agreementItems->each(function ($item) {
+            $item->void();
+        });
+    }
+
+    /**
+     * Unvoid this agreement, and all associated items.
+     *
+     * @return void
+     */
+    public function unvoid() : void
+    {
+        $this->voided_at = null;
+        $this->save();
+
+        // For every item associated with this, set voided_at to null
+        $this->agreementItems->each(function ($item) {
+            $item->unvoid();
+        });
+    }
+
 }

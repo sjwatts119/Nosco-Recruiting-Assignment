@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->integer('cost_price');
             $table->integer('retail_price');
+            $table->timestamp('voided_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

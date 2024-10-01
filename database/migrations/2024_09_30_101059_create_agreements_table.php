@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('customer_surname');
             $table->date('customer_date_of_birth');
             $table->foreignId('created_by')->constrained('users');
+            $table->timestamp('voided_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

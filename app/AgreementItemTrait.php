@@ -6,12 +6,13 @@ trait AgreementItemTrait
 {
     public function rules(): array
     {
+        // Validate the input
         return [
             'name' => 'required|max:255',
             'description' => 'required|max:2000',
             'quantity' => 'required|integer|min:1',
-            'cost_price' => 'required|numeric|min:0',
-            'retail_price' => 'required|numeric|min:0',
+            'cost_price' => ['required', 'numeric', 'min:0', 'decimal:0,2'],
+            'retail_price' => ['required', 'numeric', 'min:0', 'decimal:0,2'],
         ];
     }
 
