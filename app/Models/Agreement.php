@@ -37,4 +37,24 @@ class Agreement extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    /**
+     * Get the full name of the customer.
+     *
+     * @return string
+     */
+    public function getFullCustomerName() : string
+    {
+        return $this->customer_forename . ' ' . $this->customer_surname;
+    }
+
+    /**
+     * Get the number of agreement items related to this agreement.
+     *
+     * @return int
+     */
+    public function getTotalItemsCount() : int
+    {
+        return $this->agreementItems->sum('quantity');
+    }
 }
