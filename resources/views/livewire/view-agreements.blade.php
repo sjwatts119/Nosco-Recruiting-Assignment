@@ -44,5 +44,5 @@
             </tbody>
         </table>
     </div>
-    {{ $agreements->links('livewire.pages.agreements.components.pagination-links') }}
+    {{ $agreements->links('agreements.components.pagination-links') }}
 </div>

@@ -8,17 +8,17 @@ class AgreementController extends Controller
 {
     public function index()
     {
-        return view('livewire.pages.agreements.index');
+        return view('agreements.index');
     }
 
     public function show($slug)
     {
         $agreement = Agreement::where('id', $slug)->firstOrFail();
-        return view('livewire.pages.agreements.show', ['agreement' => $agreement]);
+        return view('agreements.show', ['agreement' => $agreement]);
     }
 
     public function create()
     {
-        return view('livewire.pages.agreements.create');
+        return view('agreements.create');
     }
 }

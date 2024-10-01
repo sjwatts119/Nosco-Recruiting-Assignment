@@ -34,6 +34,15 @@ new class extends Component
                         {{ __('Agreements') }}
                     </x-nav-link>
                 </div>
+
+                {{-- if user is admin, give access to reports --}}
+                @if(auth()->user()->role === 'owner')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('admin.reports.index')" :active="request()->routeIs('admin.reports.index')" wire:navigate>
+                            {{ __('Reports') }}
+                        </x-nav-link>
+                    </div>
+                @endif
             </div>
 
             <!-- Settings Dropdown -->
@@ -84,6 +93,12 @@ new class extends Component
             <x-responsive-nav-link :href="route('agreements.index')" :active="request()->routeIs('agreements.index') || request()->routeIs('agreements.show') || request()->routeIs('agreements.create')" wire:navigate>
                 {{ __('Agreements') }}
             </x-responsive-nav-link>
+            
+            @if(auth()->user()->role === 'owner')
+                <x-responsive-nav-link :href="route('admin.reports.index')" :active="request()->routeIs('admin.reports.index')" wire:navigate>
+                    {{ __('Reports') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

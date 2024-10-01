@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AgreementController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::view('profile', 'profile')
@@ -18,5 +19,9 @@ Route::get('agreements/show/{slug}', [AgreementController::class, 'show'])
 Route::get('agreements/create', [AgreementController::class, 'create'])
     ->middleware(['auth'])
     ->name('agreements.create');
+
+Route::get('/admin/reports', function () {
+    return view('admin.reports.index');
+})->middleware(AdminMiddleware::class)->name('admin.reports.index');
 
 require __DIR__.'/auth.php';
