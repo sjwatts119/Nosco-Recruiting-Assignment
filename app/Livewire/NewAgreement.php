@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Models\AgreementItem;
 use Illuminate\Support\Carbon;
 use Illuminate\View\View;
 use Livewire\Attributes\Validate;

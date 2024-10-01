@@ -43,20 +43,22 @@
                 </div>
             </div>
 
-            <hr class="my-10 border-gray-600"/>
+            <hr class="my-12 border-gray-600"/>
 
-            <div class="flex space-x-4 justify-center mb-4">
-                <div class="bg-green-900 hover:bg-green-800 p-4 rounded-lg mt-4 hover:bg-blue-800 transition">
+            <div class="flex space-x-4 justify-center">
+                <div class="bg-green-900 hover:bg-green-800 border-green-700 border p-4 rounded-lg hover:bg-blue-800 transition">
                     <div class="flex justify-between">
                         <div class="text-white text-lg">Total Cost Price: {{ $agreement->getTotalCostPrice() }}</div>
                     </div>
                 </div>
-                <div class="bg-blue-900 hover:bg-blue-800 transition p-4 rounded-lg mt-4">
+                <div class="bg-blue-900 hover:bg-blue-800 border-blue-700 border transition p-4 rounded-lg ">
                     <div class="flex justify-between">
                         <div class="text-white text-lg">Total Retail Price: {{ $agreement->getTotalRetailPrice() }}</div>
                     </div>
                 </div>
             </div>
+
+            <hr class="my-12 border-gray-600"/>
 
             {{-- Products heading --}}
             <h2 class="text-center text-2xl font-bold text-white mt-8 mb-4">Items</h2>
@@ -66,7 +68,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     @foreach($agreement->agreementItems as $item)
                         <div class="relative block w-full p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition">
-                            <span class="absolute top-4 right-4 bg-blue-900 hover:bg-blue-800 transition text-white text-xs font-semibold px-3 py-1 rounded-full">
+                            <span class="absolute top-4 right-4 bg-blue-900 hover:bg-blue-800 border-blue-700 border transition text-white text-xs font-semibold px-3 py-1 rounded-full">
                                 Qty: {{$item->quantity}}
                             </span>
 
@@ -77,10 +79,10 @@
                             <hr class="my-8 border-gray-200 dark:border-gray-600"/>
 
                             <div class="flex justify-between items-center gap-x-4">
-                                <span class="bg-green-900 hover:bg-green-800 transition text-white text-sm md:text-base px-4 py-2 rounded-lg flex-grow text-center flex items-center justify-center">
+                                <span class="bg-green-900 hover:bg-green-800 border-green-700 border transition text-white text-sm md:text-base px-4 py-2 rounded-lg flex-grow text-center flex items-center justify-center">
                                     Cost Price: £{{ number_format($item->cost_price, 2) }}
                                 </span>
-                                <span class="bg-blue-900 hover:bg-blue-800 transition text-white text-sm md:text-base px-4 py-2 rounded-lg flex-grow text-center flex items-center justify-center">
+                                <span class="bg-blue-900 hover:bg-blue-800 border-blue-700 border transition text-white text-sm md:text-base px-4 py-2 rounded-lg flex-grow text-center flex items-center justify-center">
                                     Retail Price: £{{ number_format($item->retail_price, 2) }}
                                 </span>
                             </div>
