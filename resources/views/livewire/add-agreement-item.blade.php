@@ -42,17 +42,22 @@
                             £
                         </div>
                         <input wire:model="cost_price"
-                                type="number"
-                                step="0.01"
-                                id="cost_price"
-                                x-model.number="cost_price"
-                                @input="cost_price = validatePositive(cost_price)"
-                                class="ps-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Enter cost price..."
-                                required />
-                        @error('cost_price') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                               type="number"
+                               step="0.01"
+                               id="cost_price"
+                               x-model.number="cost_price"
+                               @input="cost_price = validatePositive(cost_price)"
+                               class="ps-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Enter cost price..."
+                               required />
+                    </div>
+                    <div>
+                        @error('cost_price')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
+
 
                 <div class="mb-8">
                     <label for="retail_price" class="block text-white text-sm font-bold mb-2">Retail Price:</label>
@@ -69,7 +74,11 @@
                                 class="ps-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Enter retail price..."
                                 required />
-                        @error('retail_price') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    </div>
+                    <div>
+                        @error('retail_price')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
             </div>

@@ -20,6 +20,14 @@ class AddAgreementItem extends ModalComponent
             'retail_price' => 'required|numeric|min:0',
         ];
     }
+
+    public function mount() : void {
+        // On mount, set the default values for the numerical fields
+        $this->quantity = 1;
+        $this->cost_price = 0.00;
+        $this->retail_price = 0.00;
+    }
+
     public function addItem() : void {
         // Validate the input
         $validated = $this->validate();
