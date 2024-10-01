@@ -39,7 +39,7 @@
                     @if(!$agreement->voided_at)
                         <span class="self-center bg-green-500 text-green-800 text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded-xl dark:bg-green-800 dark:text-green-200 border border-green-600">Active</span>
                     @else
-                        <span class="self-center bg-red-500 text-red-800 text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded-xl dark:bg-red-900 dark:text-red-200 border border-red-600">Voided</span>
+                        <span class="self-center bg-red-500 text-red-800 text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded-xl dark:bg-red-900 dark:text-red-200 border border-red-600">Void</span>
                     @endif
                 </div>
             </div>
