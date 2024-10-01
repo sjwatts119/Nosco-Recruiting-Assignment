@@ -1,28 +1,81 @@
 <div>
-    <div class="bg-gray-800 p-4 rounded-lg">
+    <div class="bg-gray-800 p-6 rounded-lg">
         <form wire:submit.prevent="editItem">
             <div class="mb-4">
-                <label for="name" class="block text-white text-sm font-bold mb-2">Name:</label>
-                <input type="text" id="name" wire:model="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name:</label>
+                <input type="text" id="name" wire:model="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter item name...">
+                @error('name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
             <div class="mb-4">
-                <label for="description" class="block text-white text-sm font-bold mb-2">Description:</label>
-                <input type="text" id="description" wire:model="description" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description:</label>
+                <textarea id="description" wire:model="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter item description..."></textarea>
+                @error('description') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
-            <div class="mb-4">
-                <label for="quantity" class="block text-white text-sm font-bold mb-2">Quantity:</label>
-                <input type="number" id="quantity" wire:model="quantity" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <div x-data="{
+                quantity: @entangle('quantity'),
+                cost_price: @entangle('cost_price'),
+                retail_price: @entangle('retail_price'),
+                validatePositive(value) {
+                    return Math.max(value, 0);
+                },
+                validateQuantity(value) {
+                    return Math.max(value, 1);
+                }
+            }">
+                <div class="mb-4">
+                    <label for="quantity" class="block text-white text-sm font-bold mb-2">Quantity:</label>
+                    <input wire:model="quantity"
+                           type="number"
+                           id="quantity"
+                           x-model.number="quantity"
+                           @input="quantity = validateQuantity(quantity)"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           placeholder="Enter quantity..."
+                           required />
+                    @error('quantity') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                </div>
+
+                <div class="mb-4">
+                    <label for="cost_price" class="block text-white text-sm font-bold mb-2">Cost Price:</label>
+                    <div class="relative w-full">
+                        <div class="absolute inset-y-0 start-0 top-0 flex items-center ps-3.5 pointer-events-none text-gray-300">
+                            £
+                        </div>
+                        <input wire:model="cost_price"
+                               type="number"
+                               step="0.01"
+                               id="cost_price"
+                               x-model.number="cost_price"
+                               @input="cost_price = validatePositive(cost_price)"
+                               class="ps-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Enter cost price..."
+                               required />
+                        @error('cost_price') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <label for="retail_price" class="block text-white text-sm font-bold mb-2">Retail Price:</label>
+                    <div class="relative w-full">
+                        <div class="absolute inset-y-0 start-0 top-0 flex items-center ps-3.5 pointer-events-none text-gray-300">
+                            £
+                        </div>
+                        <input wire:model="retail_price"
+                               type="number"
+                               step="0.01"
+                               id="retail_price"
+                               x-model.number="retail_price"
+                               @input="retail_price = validatePositive(retail_price)"
+                               class="ps-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Enter retail price..."
+                               required />
+                        @error('retail_price') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    </div>
+                </div>
             </div>
-            <div class="mb-4">
-                <label for="cost_price" class="block text-white text-sm font-bold mb-2">Cost Price:</label>
-                <input type="number" step="0.01" id="cost_price" wire:model="cost_price" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
-            <div class="mb-4">
-                <label for="retail_price" class="block text-white text-sm font-bold mb-2">Retail Price:</label>
-                <input type="number" step="0.01" id="retail_price" wire:model="retail_price" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
+
             <div class="flex justify-end">
-                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Edit This Item</button>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition">Confirm Changes</button>
             </div>
         </form>
     </div>

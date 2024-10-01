@@ -15,11 +15,11 @@ class EditAgreementItem extends ModalComponent
     public function rules() : array
     {
         return [
-            'name' => 'required',
-            'description' => 'required',
-            'quantity' => 'required|numeric',
-            'cost_price' => 'required|numeric',
-            'retail_price' => 'required|numeric',
+            'name' => 'required|max:255',
+            'description' => 'required|max:2000',
+            'quantity' => 'required|integer|min:1',
+            'cost_price' => 'required|numeric|min:0',
+            'retail_price' => 'required|numeric|min:0',
         ];
     }
 
@@ -27,6 +27,10 @@ class EditAgreementItem extends ModalComponent
     {
         // Validate the input
         $validated = $this->validate();
+
+        // Ensure prices have two decimal places
+        $validated['cost_price'] = number_format($validated['cost_price'], 2);
+        $validated['retail_price'] = number_format($validated['retail_price'], 2);
 
         // Dispatch event to parent component
         $this->closeModalWithEvents([
