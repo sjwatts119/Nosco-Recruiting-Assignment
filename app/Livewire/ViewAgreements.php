@@ -14,13 +14,22 @@ class ViewAgreements extends Component
 
     public $search = '';
 
-    // Reset the page when the search query is updated.
-    public function updatingSearch() : void
+    /**
+     * When the user updates the search field, reset the page to 1.
+     *
+     * @return void
+     */
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }
 
-    public function render() : View
+    /**
+     * Render the view agreements component with the search results.
+     *
+     * @return View
+     */
+    public function render(): View
     {
         $results = [];
 

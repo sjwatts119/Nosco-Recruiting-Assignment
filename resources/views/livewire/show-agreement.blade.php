@@ -1,5 +1,5 @@
 <div>
-    <div class="mx-auto max-w-screen-xl mt-10">
+    <div class="container mx-auto max-w-screen-xl sm:mt-10 p-4">
         <div class="w-full flex justify-between">
             <a href="{{ route('agreements.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition" wire:navigate>Back</a>
 

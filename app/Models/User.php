@@ -53,7 +53,7 @@ class User extends Authenticatable
      *
      * @return HasMany
      */
-    public function agreements() : HasMany
+    public function agreements(): HasMany
     {
         return $this->hasMany(Agreement::class, 'created_by');
     }
@@ -63,7 +63,7 @@ class User extends Authenticatable
      *
      * @return bool
      */
-    public function isOwner() : bool
+    public function isOwner(): bool
     {
         return $this->role === 'owner';
     }
@@ -73,7 +73,7 @@ class User extends Authenticatable
      *
      * @return bool
      */
-    public function isStaff() : bool
+    public function isStaff(): bool
     {
         return $this->role === 'staff';
     }
@@ -85,7 +85,7 @@ class User extends Authenticatable
      */
     public function getTotalItemsCount(): int
     {
-        return $this->agreements->sum(function($agreement) {
+        return $this->agreements->sum(function ($agreement) {
             return $agreement->getTotalItemsCount();
         });
     }
@@ -97,7 +97,7 @@ class User extends Authenticatable
      */
     public function getTotalCostPrice(): int
     {
-        return $this->agreements->sum(function($agreement) {
+        return $this->agreements->sum(function ($agreement) {
             return $agreement->getTotalCostPrice();
         });
     }
@@ -109,7 +109,7 @@ class User extends Authenticatable
      */
     public function getTotalRetailPrice(): int
     {
-        return $this->agreements->sum(function($agreement) {
+        return $this->agreements->sum(function ($agreement) {
             return $agreement->getTotalRetailPrice();
         });
     }

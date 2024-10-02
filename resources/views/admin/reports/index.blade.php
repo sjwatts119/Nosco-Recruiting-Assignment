@@ -1,6 +1,6 @@
 <x-app-layout>
-    <div class="container mx-auto max-w-screen-xl mt-10">
-        <div class="bg-gray-800 p-4 rounded-lg mt-4">
+    <div class="container mx-auto max-w-screen-xl sm:mt-10 p-4">
+        <div class="bg-gray-800 p-4 rounded-lg">
             <livewire:staff-reports />
         </div>
     </div>

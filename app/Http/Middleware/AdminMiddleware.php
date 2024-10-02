@@ -10,10 +10,9 @@ use Symfony\Component\HttpFoundation\Response;
 class AdminMiddleware
 {
     /**
-     * Handle an incoming request.
+     * Handle an incoming request where a user must be an admin.
      *
      * @param Request $request
-     *
      * @param Closure $next
      *
      * @return Response
@@ -24,6 +23,6 @@ class AdminMiddleware
             return $next($request);
         }
 
-        return redirect('/'); // Redirect to home
+        return redirect('/');
     }
 }

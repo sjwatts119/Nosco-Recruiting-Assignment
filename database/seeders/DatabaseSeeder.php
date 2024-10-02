@@ -15,30 +15,29 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Make 10 staff members
         User::factory()->count(10)->create([
             'role' => 'staff',
         ]);
 
         User::factory()->create([
-            'name' => 'Test User',
+            'name' => 'Staff User',
             'role' => 'staff',
-            'email' => 'test@example.com',
+            'email' => 'staff@example.com',
         ]);
 
         User::factory()->create([
             'name' => 'Owner User',
             'role' => 'owner',
-            'email' => 'admin@example.com',
+            'email' => 'owner@example.com',
         ]);
 
-        // Make between 0 and 5 agreements for each staff member
+        // Make between 1 and 10 agreements for each staff member
         User::where('role', 'staff')->get()->each(function ($staff) {
             Agreement::factory()->count(rand(1,10))->create([
                 'created_by' => $staff->id,
             ]);
 
-            // Make between 0 and 5 agreement items for each agreement
+            // Make between 1 and 5 agreement items for each agreement
             $staff->agreements->each(function ($agreement) {
                 AgreementItem::factory()->count(rand(1,5))->create([
                     'agreement_id' => $agreement->id,

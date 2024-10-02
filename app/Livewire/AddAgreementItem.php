@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\AgreementItemTrait;
+use Illuminate\View\View;
 use Livewire\Attributes\Validate;
 use LivewireUI\Modal\ModalComponent;
 
@@ -15,19 +16,29 @@ class AddAgreementItem extends ModalComponent
     #[Validate]
     public $name, $description, $quantity, $cost_price, $retail_price;
 
-    public function mount() : void {
-        // On mount, set the default values for the numerical fields
+    /**
+     * On mount, set the default values for the numerical fields.
+     *
+     * @return void
+     */
+    public function mount(): void
+    {
         $this->quantity = 1;
     }
 
-    public function addItem() : void {
-        // Validate the input
+    /**
+     * Add an item to the agreement and close the modal.
+     *
+     * @return void
+     */
+    public function addItem(): void
+    {
         $validated = $this->validate();
 
         // Convert the prices to integers (pennies)
         $validated = $this->formatPrices($validated);
 
-        // Close the modal passing the validated input to the parent component
+        // Close the modal passing the validated input to the NewAgreement component
         $this->closeModalWithEvents([
             NewAgreement::class => ['addItem', [
                 'data' => $validated
@@ -35,7 +46,7 @@ class AddAgreementItem extends ModalComponent
         ]);
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.modal-agreement-item');
     }

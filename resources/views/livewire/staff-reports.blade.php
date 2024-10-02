@@ -72,14 +72,18 @@
     </div>
 </div>
 
+@script
 <script>
     document.addEventListener("livewire:navigating", () => {
-        // Reinitialize Flowbite Datepicker before Livewire performs the navigation...
+        // Reinitialize Flowbite Datepicker before Livewire performs the navigation
         initFlowbite();
     });
 
     document.addEventListener("livewire:navigated", () => {
-        // Reinitialize Flowbite Datepicker after Livewire has finished loading the new page...
+        // Reinitialize Flowbite Datepicker after Livewire has finished loading the new page
         initFlowbite();
     });
 </script>
+@endscript
+
+

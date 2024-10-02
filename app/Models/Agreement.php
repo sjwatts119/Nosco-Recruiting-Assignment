@@ -25,7 +25,7 @@ class Agreement extends Model
      *
      * @return HasMany
      */
-    public function agreementItems() : HasMany
+    public function agreementItems(): HasMany
     {
         return $this->hasMany(AgreementItem::class);
     }
@@ -35,7 +35,7 @@ class Agreement extends Model
      *
      * @return BelongsTo
      */
-    public function user() : BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by')->withTrashed();
     }
@@ -45,7 +45,7 @@ class Agreement extends Model
      *
      * @return string
      */
-    public function getFullCustomerName() : string
+    public function getFullCustomerName(): string
     {
         return $this->customer_forename . ' ' . $this->customer_surname;
     }
@@ -55,7 +55,7 @@ class Agreement extends Model
      *
      * @return string
      */
-    public function getFormattedDateOfBirth() : string
+    public function getFormattedDateOfBirth(): string
     {
         return date('d/m/Y', strtotime($this->customer_date_of_birth));
     }
@@ -65,7 +65,7 @@ class Agreement extends Model
      *
      * @return int
      */
-    public function getTotalItemsCount() : int
+    public function getTotalItemsCount(): int
     {
         return $this->agreementItems->sum('quantity');
     }
@@ -75,7 +75,7 @@ class Agreement extends Model
      *
      * @return float
      */
-    public function getTotalCostPrice() : float
+    public function getTotalCostPrice(): float
     {
         return $this->agreementItems->sum(function ($item) {
             return $item->cost_price * $item->quantity;
@@ -87,7 +87,7 @@ class Agreement extends Model
      *
      * @return float
      */
-    public function getTotalRetailPrice() : float
+    public function getTotalRetailPrice(): float
     {
         return $this->agreementItems->sum(function ($item) {
             return $item->retail_price * $item->quantity;
@@ -99,7 +99,7 @@ class Agreement extends Model
      *
      * @return void
      */
-    public function void() : void
+    public function void(): void
     {
         $this->voided_at = now();
         $this->save();
@@ -115,7 +115,7 @@ class Agreement extends Model
      *
      * @return void
      */
-    public function unvoid() : void
+    public function unvoid(): void
     {
         $this->voided_at = null;
         $this->save();

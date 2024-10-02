@@ -25,7 +25,7 @@ class AgreementItem extends Model
      * An agreement item belongs to an agreement.
      * @return BelongsTo
      */
-    public function agreement() : BelongsTo
+    public function agreement(): BelongsTo
     {
         return $this->belongsTo(Agreement::class);
     }
@@ -36,7 +36,7 @@ class AgreementItem extends Model
      * @param $value
      * @return float
      */
-    public function getCostPriceAttribute($value) : float
+    public function getCostPriceAttribute($value): float
     {
         return $value / 100;
     }
@@ -44,9 +44,10 @@ class AgreementItem extends Model
     /**
      * As we store prices in pennies, we need to convert them to pounds when we retrieve them.
      * @param $value
+     *
      * @return float
      */
-    public function getRetailPriceAttribute($value) : float
+    public function getRetailPriceAttribute($value): float
     {
         return $value / 100;
     }

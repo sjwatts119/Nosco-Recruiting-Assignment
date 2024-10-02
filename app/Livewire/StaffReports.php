@@ -10,22 +10,40 @@ use Livewire\Component;
 class StaffReports extends Component
 {
     public Collection $staff;
-
     public $dateRange = 'all-time';
     public $sortField = 'id';
     public $sortDescending = true;
 
+    /**
+     * When mounting, load the staff data.
+     *
+     * @return void
+     */
     public function mount(): void
     {
         $this->loadStaff();
     }
 
+    /**
+     * When the user selects a date range, update the date range value and reload the staff data.
+     *
+     * @param $range
+     *
+     * @return void
+     */
     public function selectDateRange($range): void
     {
         $this->dateRange = $range;
         $this->loadStaff();
     }
 
+    /**
+     * Sort the staff data by the selected field. If the field is the same as the current sort field, toggle the sort direction.
+     *
+     * @param $field
+     *
+     * @return void
+     */
     public function sortBy($field): void
     {
         // If the sort field is the same, toggle the sorting direction
@@ -36,13 +54,19 @@ class StaffReports extends Component
             $this->sortDescending = true;
         }
 
-        // Re-load staff with new sort order
         $this->loadStaff();
     }
 
+    /**
+     * Calculate the required data for each user within the date range.
+     *
+     * @param $staff
+     *
+     * @return Collection
+     */
     public function getDateRangedAgreementData($staff): Collection
     {
-        // For each user, we need to calculate the metrics required for the table
+        // For each user, calculate the metrics required for the table
         return $staff->map(function ($user) {
             // Total number of purchase agreements
             $agreementsCount = $user->agreements->count();
@@ -78,12 +102,26 @@ class StaffReports extends Component
         });
     }
 
+    /**
+     * Sort the staff collection based on the sortField and sortDirection.
+     *
+     * @param $staff
+     *
+     * @return Collection
+     */
     public function sort($staff): Collection
     {
         // Sort the staff collection based on the sortField and sortDirection
         return $staff->sortBy($this->sortField, SORT_REGULAR, $this->sortDescending);
     }
 
+    /**
+     * Load the staff data based on the selected date range. If no date range is selected, load all staff data.
+     * The staff data is then sorted based on the selected sort field and direction.
+     * The staff data is then updated in the staff property.
+     *
+     * @return void
+     */
     public function loadStaff(): void
     {
         // Get the date range from the user selected filtering range
@@ -103,10 +141,8 @@ class StaffReports extends Component
             }
         }, 'agreements.agreementItems'])->get();
 
-        // Get the required metrics for each user
         $this->staff = $this->getDateRangedAgreementData($this->staff);
 
-        // Sort the staff collection based on the sortField and sortDirection
         $this->staff = $this->sort($this->staff);
     }
 

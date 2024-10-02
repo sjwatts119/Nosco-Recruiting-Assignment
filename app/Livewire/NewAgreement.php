@@ -13,31 +13,41 @@ class NewAgreement extends Component
     public $customerForename, $customerSurname, $customerDateOfBirth;
     public $items = [];
 
-    // Event listener for addNewPurchaseAgreementItem
     protected $listeners = [
         'addItem',
         'updateItem',
     ];
 
-    public function rules() : array
+    public function rules(): array
     {
         return [
             'customerForename' => 'required',
             'customerSurname' => 'required',
-            'customerDateOfBirth' => 'required|date_format:m/d/Y',
+            'customerDateOfBirth' => 'required|date_format:m/d/Y|before:today',
         ];
     }
 
-    // On addNewPurchaseAgreementItem event
-    public function addItem($data) : void
+    /**
+     * When addItem event is heard, add the item to the array.
+     *
+     * @param $data
+     *
+     * @return void
+     */
+    public function addItem($data): void
     {
-        // Add the new item to the array
         $this->items[] = $data;
     }
 
-    public function startEditingItem($key) : void
+    /**
+     * Take the key of the item to edit, and open the edit modal sending the current data.
+     *
+     * @param $key
+     *
+     * @return void
+     */
+    public function startEditingItem($key): void
     {
-        // Get the item from the array
         $item = $this->items[$key];
 
         // Open the edit modal, passing current data and array key
@@ -51,22 +61,38 @@ class NewAgreement extends Component
         ]);
     }
 
-    // On updateItem event
-    public function updateItem($data, $key) : void
+    /**
+     * When editItem event is heard, modify the item in the array based on the key.
+     *
+     * @param $data
+     * @param $key
+     *
+     * @return void
+     */
+    public function updateItem($data, $key): void
     {
-        // Update the item in the array
         $this->items[$key] = $data;
     }
 
-    public function removeItem($key) : void
+    /**
+     * Remove the item from the array based on the key.
+     *
+     * @param $key
+     *
+     * @return void
+     */
+    public function removeItem($key): void
     {
-        // Remove the item from the array
         unset($this->items[$key]);
     }
 
-    public function newPurchaseAgreement() : void
+    /**
+     * Validate the input, and create a new purchase agreement with the items and customer details.
+     *
+     * @return void
+     */
+    public function newPurchaseAgreement(): void
     {
-        // Validate the input
         $validated = $this->validate();
 
         // If there are no items, display an error message
@@ -78,32 +104,26 @@ class NewAgreement extends Component
         // Convert the date format to Y-m-d
         $validated['customerDateOfBirth'] = Carbon::createFromFormat('m/d/Y', $validated['customerDateOfBirth'])->format('Y-m-d');
 
-        // Create the new agreement
         $agreement = auth()->user()->agreements()->create([
             'customer_forename' => $validated['customerForename'],
             'customer_surname' => $validated['customerSurname'],
             'customer_date_of_birth' => $validated['customerDateOfBirth'],
         ]);
 
-        // Save all items to the database
         foreach ($this->items as $item) {
             $agreement->agreementItems()->create($item);
         }
 
-        // Clear the array
         $this->items = [];
 
-        // Reset the input fields
+        // Reset the input fields of the form
         $this->reset(['customerForename', 'customerSurname', 'customerDateOfBirth']);
-
-        // Dispatch success message
-        $this->dispatch('agreement-created');
 
         // Redirect to the agreements page with a success message
         redirect()->route('agreements.index')->with('success', 'Agreement created successfully!');
     }
 
-    public function render() : View
+    public function render(): View
     {
         return view('livewire.new-agreement');
     }
