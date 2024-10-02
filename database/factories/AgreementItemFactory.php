@@ -16,9 +16,9 @@ class AgreementItemFactory extends Factory
             'agreement_id' => Agreement::factory(), // Default value if not provided
             'name' => $this->faker->word,
             'description' => $this->faker->sentence,
-            'quantity' => $this->faker->numberBetween(1, 10),
+            'quantity' => $this->faker->numberBetween(1, 25),
             'cost_price' => $this->faker->numberBetween(1, 10000),
-            'retail_price' => $this->faker->numberBetween(1, 10000),
+            'retail_price' => $this->faker->numberBetween(1, 20000),
         ];
     }
 
