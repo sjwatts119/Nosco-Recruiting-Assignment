@@ -33,6 +33,30 @@ class UserFactory extends Factory
     }
 
     /**
+     * Indicate that the model's role is staff.
+     *
+     * @return static
+     */
+    public function staff(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => 'staff',
+        ]);
+    }
+
+    /**
+     * Indicate that the model's role is owner.
+     *
+     * @return static
+     */
+    public function owner(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => 'owner',
+        ]);
+    }
+
+    /**
      * Indicate that the model's email address should be unverified.
      */
     public function unverified(): static

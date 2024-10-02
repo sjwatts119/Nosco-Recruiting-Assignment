@@ -11,9 +11,21 @@ class ProfileTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_profile_page_is_displayed(): void
+    public function test_profile_page_is_displayed_for_staff(): void
     {
-        $user = User::factory()->create();
+        // Create a staff member by setting the role to staff
+        $user = User::factory()->staff()->create();
+
+        $response = $this->actingAs($user)->get('/profile');
+
+        $response
+            ->assertOk()
+            ->assertSeeVolt('profile.update-password-form');
+    }
+
+    public function test_profile_page_is_displayed_for_owner(): void
+    {
+        $user = User::factory()->owner()->create();
 
         $response = $this->actingAs($user)->get('/profile');
 

@@ -83,4 +83,28 @@ class AuthenticationTest extends TestCase
 
         $this->assertGuest();
     }
+
+    public function test_staff_users_can_not_access_the_admin_views(): void
+    {
+        $user = User::factory()->staff()->create();
+
+        $this->actingAs($user);
+
+        $response = $this->get('/admin/reports');
+
+        $response->assertRedirect('/');
+    }
+
+    public function test_staff_cannot_see_admin_navigation_links(): void
+    {
+        $user = User::factory()->staff()->create();
+
+        $this->actingAs($user);
+
+        $response = $this->get('/');
+
+        $response
+            ->assertOk()
+            ->assertDontSee('Reports');
+    }
 }

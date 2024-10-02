@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class AgreementItem extends Model
 {
     use SoftDeletes;
+    use HasFactory;
 
     protected $fillable = [
         'agreement_id',
