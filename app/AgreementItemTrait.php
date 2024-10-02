@@ -10,9 +10,9 @@ trait AgreementItemTrait
         return [
             'name' => 'required|max:255',
             'description' => 'required|max:2000',
-            'quantity' => 'required|integer|min:1',
-            'cost_price' => ['required', 'numeric', 'min:0', 'decimal:0,2'],
-            'retail_price' => ['required', 'numeric', 'min:0', 'decimal:0,2'],
+            'quantity' => 'required|integer|min:1|max:99',
+            'cost_price' => ['required', 'numeric', 'min:0', 'max:99999', 'decimal:0,2'],
+            'retail_price' => ['required', 'numeric', 'min:0', 'max:99999', 'decimal:0,2'],
         ];
     }
 

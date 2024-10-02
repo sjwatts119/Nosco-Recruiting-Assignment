@@ -77,4 +77,40 @@ class User extends Authenticatable
     {
         return $this->role === 'staff';
     }
+
+    /**
+     * Get the number of agreement items this user has processed in all of their agreements.
+     *
+     * @return int
+     */
+    public function getTotalItemsCount(): int
+    {
+        return $this->agreements->sum(function($agreement) {
+            return $agreement->getTotalItemsCount();
+        });
+    }
+
+    /**
+     * Get the total cost of all agreement items this user has processed in all of their agreements.
+     *
+     * @return int
+     */
+    public function getTotalCostPrice(): int
+    {
+        return $this->agreements->sum(function($agreement) {
+            return $agreement->getTotalCostPrice();
+        });
+    }
+
+    /**
+     * Get the total retail cost of all agreement items this user has processed in all of their agreements.
+     *
+     * @return int
+     */
+    public function getTotalRetailPrice(): int
+    {
+        return $this->agreements->sum(function($agreement) {
+            return $agreement->getTotalRetailPrice();
+        });
+    }
 }

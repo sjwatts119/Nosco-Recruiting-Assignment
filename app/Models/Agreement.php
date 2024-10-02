@@ -73,25 +73,25 @@ class Agreement extends Model
     /**
      * Get the total cost of all agreement items related to this agreement.
      *
-     * @return string
+     * @return float
      */
-    public function getTotalCostPrice() : string
+    public function getTotalCostPrice() : float
     {
-        return '£' . number_format($this->agreementItems->sum(function ($item) {
+        return $this->agreementItems->sum(function ($item) {
             return $item->cost_price * $item->quantity;
-        }), 2);
+        });
     }
 
     /**
      * Get the total retail price of all agreement items related to this agreement.
      *
-     * @return string
+     * @return float
      */
-    public function getTotalRetailPrice() : string
+    public function getTotalRetailPrice() : float
     {
-        return '£' . number_format($this->agreementItems->sum(function ($item) {
+        return $this->agreementItems->sum(function ($item) {
             return $item->retail_price * $item->quantity;
-        }), 2);
+        });
     }
 
     /**

@@ -71,12 +71,12 @@
             <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
                 <div class="bg-green-900 hover:bg-green-800 border-green-700 border p-4 rounded-lg hover:bg-blue-800 transition">
                     <div class="flex justify-between">
-                        <div class="text-white text-lg">Total Cost Price: {{ $agreement->getTotalCostPrice() }}</div>
+                        <div class="text-white text-lg">Total Cost Price: £{{ number_format($agreement->getTotalCostPrice(), 2, '.', ',') }}</div>
                     </div>
                 </div>
                 <div class="bg-blue-900 hover:bg-blue-800 border-blue-700 border transition p-4 rounded-lg ">
                     <div class="flex justify-between">
-                        <div class="text-white text-lg">Total Retail Price: {{ $agreement->getTotalRetailPrice() }}</div>
+                        <div class="text-white text-lg">Total Retail Price: £{{ number_format($agreement->getTotalRetailPrice(), 2, '.', ',') }}</div>
                     </div>
                 </div>
             </div>
@@ -103,10 +103,10 @@
 
                             <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
                                 <span class="bg-green-900 hover:bg-green-800 border-green-700 border transition text-white text-sm md:text-base px-4 py-2 rounded-lg flex-grow text-center flex items-center justify-center">
-                                    Cost Price: £{{ number_format($item->cost_price, 2) }}
+                                    Cost Price: £{{ number_format($item->cost_price, 2, '.', ',') }}
                                 </span>
                                 <span class="bg-blue-900 hover:bg-blue-800 border-blue-700 border transition text-white text-sm md:text-base px-4 py-2 rounded-lg flex-grow text-center flex items-center justify-center">
-                                    Retail Price: £{{ number_format($item->retail_price, 2) }}
+                                    Retail Price: £{{ number_format($item->retail_price, 2, '.', ',') }}
                                 </span>
                             </div>
                         </div>
