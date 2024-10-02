@@ -1,10 +1,12 @@
-<button wire:click="sortBy('{{ $field }}')">
+<button wire:click="sortBy('{{ $field }}')" class="whitespace-nowrap inline-flex items-center">
     {{ $label }}
     @if ($sortField === $field)
         @if ($sortDescending)
-            <span>▼</span>
+            <span class="ml-1">▼</span>
         @else
-            <span>▲</span>
+            <span class="ml-1">▲</span>
         @endif
+    @else
+        <span class="ml-1 invisible">▼</span>
     @endif
 </button>
