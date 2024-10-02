@@ -57,4 +57,24 @@ class User extends Authenticatable
     {
         return $this->hasMany(Agreement::class, 'created_by');
     }
+
+    /**
+     * Does the user have the owner role?
+     *
+     * @return bool
+     */
+    public function isOwner() : bool
+    {
+        return $this->role === 'owner';
+    }
+
+    /**
+     * Does the user have the staff role?
+     *
+     * @return bool
+     */
+    public function isStaff() : bool
+    {
+        return $this->role === 'staff';
+    }
 }

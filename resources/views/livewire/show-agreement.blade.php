@@ -27,6 +27,9 @@
                             <path fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clip-rule="evenodd"/>
                         </svg>
                         {{ $agreement->user->name }}
+                        @if($agreement->user->trashed())
+                            (Deleted)
+                        @endif
                     </span>
 
                     <span class="text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded-xl me-2 bg-gray-700 text-gray-400 border border-gray-500">

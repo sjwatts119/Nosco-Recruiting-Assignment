@@ -79,9 +79,12 @@
             </table>
         </div>
 
-        @error('items') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-
-        <div class="flex justify-end">
+        <div class="flex justify-end space-x-8">
+            @error('items')
+                <span x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 10000)" x-transition:leave="transition-opacity ease-linear duration-1000" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-cloak class="text-red-500 text-sm block h-5">
+                    {{ $message }}
+                </span>
+            @enderror
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition">Create Agreement</button>
         </div>
     </form>

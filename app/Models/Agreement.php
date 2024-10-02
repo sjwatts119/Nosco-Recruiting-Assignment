@@ -35,7 +35,7 @@ class Agreement extends Model
      */
     public function user() : BelongsTo
     {
-        return $this->belongsTo(User::class, 'created_by');
+        return $this->belongsTo(User::class, 'created_by')->withTrashed();
     }
 
     /**
